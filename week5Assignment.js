@@ -14,6 +14,8 @@ class Anime{
         return `${this.name} has ${this.episode} episodes`
     }
 }
+// genre to organize where to add an anime(name) and episodes
+//push an anime into a genre created
 class Genre{
     constructor(name){
         this.name=name
@@ -30,7 +32,7 @@ class Genre{
         return `${this.name} has ${this.anime.length} anime series`
     }
 }
-
+//creating main menu pop up to create a list for genres to add, view, delete 
 class Menu {
     constructor(){
         this.genres=[];
@@ -71,7 +73,7 @@ class Menu {
         4) Display all Genres
         `);
     }
-
+// once inside a genre, to add or delete a anime 
     showGenreMenuOptions(genreInfo){
         return prompt(`
         0) Back
@@ -81,7 +83,7 @@ class Menu {
         ${genreInfo}
         `);
     }
-
+// to display genres
     displayGenres(){
         let genreString='';
         for (let i=0; i<this.genres.length; i++){
@@ -93,19 +95,19 @@ class Menu {
         let name =prompt('Enter a new Genre')
         this.genres.push(new Genre(name));
     }
-//validate input by using the index correctly and 
+//validate input by using the index correctly 
     viewGenre(){
         let index= prompt('Enter the index of the genre you want to view');
         if (index> -1 && index < this.genres.length){
             this.selectedGenre= this.genres[index];
             let description = 'Name of Genre: ' + this.selectedGenre.name + '\n';
             
-
+// within genre picked, it will display the index, anime name, and how many episodes.
             for (let i=0; i< this.selectedGenre.animes.length; i++){
-                description += i + ' ) ' + this.selectedGenre.animes[i].name + 
-                ' - ' + this.selectedGenre.animes[i].episode + ' episodes';
+                description += i + ') ' + this.selectedGenre.animes[i].name + 
+                ' - ' + this.selectedGenre.animes[i].episode + ' episodes ';
             }
-
+// this will show create or delete anime
             let selection = this.showGenreMenuOptions(description)
             switch (selection){
                 case '1':
@@ -117,20 +119,20 @@ class Menu {
             }
         }
     }
-
+//
     deleteGenre(){
         let index = prompt('Enter the index of the genre you want to delete: ')
         if (index > -1 && index < this.genres.length){
             this.genres.splice(index, 1);
         }
     }
-
+//
     createAnime(){
         let name = prompt ('Enter a new Anime: ');
         let episode = prompt ('Enter how many episodes the anime has: ')
         this.selectedGenre.animes.push(new Anime(name, episode));
     }
-
+// splice removes an element in a array, deleting one from index
     deleteAnime(){
         let index= prompt ("Enter the index of the anime you want to delete: ")
         if (index > -1 && index < this.selectedGenre.animes.length){
